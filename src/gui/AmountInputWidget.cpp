@@ -5,14 +5,21 @@
 #include <QFont>
 #include <QLabel>
 #include <QLineEdit>
+#include <QRegularExpression>
+#include <QRegularExpressionValidator>
 #include <QVBoxLayout>
 
 AmountInputWidget::AmountInputWidget(QWidget* parent) : QFrame(parent)
 {
 	m_line_edit = new ScalableLineEdit(this);
 	m_line_edit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-	m_label = new QLabel("Test", this);
+	QRegularExpression reg_exp("^[0-9.]+$");
+	QRegularExpressionValidator* validator = new QRegularExpressionValidator(reg_exp, this);
+	m_line_edit->setValidator(validator);
+
+	m_label = new QLabel(this);
 	m_label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	m_label->setText("1 RUB = 1 RUB");
 
 	QVBoxLayout* main_layout = new QVBoxLayout(this);
 	main_layout->setSpacing(3);

@@ -30,7 +30,6 @@ CurrencyDropdown::CurrencyDropdown(QWidget* parent) : QWidget(parent)
 	buttons[RUB]->setText("RUB");
 	buttons[USD]->setText("USD");
 	buttons[EUR]->setText("EUR");
-	buttons[OTHER]->setText("OTHER");
 
 	QHBoxLayout* layout = new QHBoxLayout(this);
 	layout->setSpacing(0);
