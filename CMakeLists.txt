@@ -12,5 +12,7 @@ qt_standard_project_setup()
 
 qt_add_executable(RubleConverter src/main.cpp)
 
-target_link_libraries(RubleConverter PRIVATE Qt6::Core Qt6::Widgets
+add_subdirectory(src/gui)
+
+target_link_libraries(RubleConverter PRIVATE GUI Qt6::Core Qt6::Widgets
                                              Qt6::Network)
