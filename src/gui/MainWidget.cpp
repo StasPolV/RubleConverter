@@ -21,6 +21,7 @@ MainWidget::MainWidget(QWidget* parent) : QWidget(parent)
 	m_switch_button = new ScalableIconButton(this);
 	m_switch_button->SetIconSource(":/images/arrows.png");
 	m_switch_button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+	m_switch_button->setMinimumWidth(50);
 	main_layout->addWidget(m_switch_button, 1);
 	main_layout->addWidget(panel_2, 3);
 }

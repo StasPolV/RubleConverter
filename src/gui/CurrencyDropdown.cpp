@@ -1,6 +1,10 @@
 #include "CurrencyDropdown.h"
 
+#include "CurrencyModel.h"
+
+#include <QEvent>
 #include <QHBoxLayout>
+#include <QListView>
 #include <QMenu>
 #include <QToolButton>
 
@@ -43,5 +47,67 @@ CurrencyDropdown::CurrencyDropdown(QWidget* parent) : QWidget(parent)
 		}
 	}
 
-	// TODO: implement pop-up window after pressing arrow button
+	m_currency_model = new CurrencyModel(this);
+
+	m_view = new QListView(this);
+	m_view->setModel(m_currency_model);
+	m_view->setWrapping(true);
+	m_view->setVisible(false);
+	m_view->setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
+
+	connect(buttons[ARROW], &QToolButton::clicked, this, [this]() { TogglePopup(); });
+}
+
+void CurrencyDropdown::TogglePopup()
+{
+	if (m_view->isVisible())
+	{
+		m_view->hide();
+		if (window())
+		{
+			window()->removeEventFilter(this);
+		}
+
+		return;
+	}
+
+	if (window())
+	{
+		window()->installEventFilter(this);
+	}
+
+	ResizePopup();
+}
+
+void CurrencyDropdown::ResizePopup()
+{
+	const QPoint global_pos = mapToGlobal(QPoint(0, height()));
+	m_view->move(global_pos);
+	m_view->resize(width(), 150);
+	m_view->show();
+}
+
+bool CurrencyDropdown::eventFilter(QObject* watched, QEvent* event)
+{
+	if (watched == window() && m_view->isVisible())
+	{
+		switch (event->type())
+		{
+		case QEvent::Move:
+		case QEvent::Resize: ResizePopup(); break;
+		case QEvent::WindowStateChange:
+			if (window()->isMinimized())
+			{
+				m_view->hide();
+			}
+			else
+			{
+				ResizePopup();
+			}
+			break;
+		default: break;
+		}
+	}
+
+	return QWidget::eventFilter(watched, event);
 }
