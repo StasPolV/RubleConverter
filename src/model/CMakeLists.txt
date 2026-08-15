@@ -1,4 +1,4 @@
-add_library(Model)
+add_library(Model CurrencyModel.h CurrencyModel.cpp)
 
 target_include_directories(Model PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
