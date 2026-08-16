@@ -14,6 +14,7 @@ qt_add_executable(RubleConverter src/main.cpp resources/resources.qrc)
 
 add_subdirectory(src/gui)
 add_subdirectory(src/model)
+add_subdirectory(src/core)
 
 target_link_libraries(RubleConverter PRIVATE GUI Qt6::Core Qt6::Widgets
                                              Qt6::Network)

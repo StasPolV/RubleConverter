@@ -13,6 +13,9 @@ struct Currency
 class CurrencyModel : public QAbstractListModel
 {
 	Q_OBJECT
+
+public slots:
+
 public:
 	enum Roles
 	{
