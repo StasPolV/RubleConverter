@@ -22,7 +22,7 @@ QVariant CurrencyModel::data(const QModelIndex& index, int role) const
 
 	switch (role)
 	{
-	case Qt::DisplayRole:
+	case Qt::DisplayRole: return QString("%1 %2").arg(c.code).arg(c.name);
 	case NameRole: return c.name;
 	case CodeRole: return c.code;
 	default: return {};
