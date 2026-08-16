@@ -29,6 +29,27 @@ MainWidget::MainWidget(QWidget* parent) : QWidget(parent)
 	main_layout->addWidget(panel_2, 3);
 
 	new CurrencyFetcherController(m_currency_model, this);
+
+	connect(m_switch_button, &ScalableIconButton::clicked, this,
+	        [this, panel_1, panel_2, main_layout]()
+	        {
+		        int index_a = main_layout->indexOf(panel_1);
+		        int index_b = main_layout->indexOf(panel_2);
+
+		        main_layout->removeWidget(panel_1);
+		        main_layout->removeWidget(panel_2);
+
+		        if (index_a < index_b)
+		        {
+			        main_layout->insertWidget(index_a, panel_2, 3);
+			        main_layout->insertWidget(index_b, panel_1, 3);
+		        }
+		        else
+		        {
+			        main_layout->insertWidget(index_b, panel_1, 3);
+			        main_layout->insertWidget(index_a, panel_2, 3);
+		        }
+	        });
 }
 
 void MainWidget::resizeEvent(QResizeEvent* event)
