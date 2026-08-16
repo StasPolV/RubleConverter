@@ -4,6 +4,7 @@
 
 class QListView;
 class CurrencyModel;
+class QToolButton;
 
 class CurrencyDropdown : public QWidget
 {
@@ -20,4 +21,5 @@ private:
 
 	CurrencyModel* m_currency_model;
 	QListView* m_view;
+	QToolButton* m_other_button;
 };

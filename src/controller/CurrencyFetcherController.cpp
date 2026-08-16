@@ -183,6 +183,7 @@ namespace
 		{
 			Currency c;
 			c.code = record.quote;
+			c.rate = record.rate;
 			if (kCurrencyNames.contains(record.quote))
 			{
 				c.name = kCurrencyNames[record.quote];

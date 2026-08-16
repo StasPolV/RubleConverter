@@ -8,6 +8,7 @@ struct Currency
 {
 	QString name;
 	QString code;
+	double rate;
 };
 
 class CurrencyModel : public QAbstractListModel

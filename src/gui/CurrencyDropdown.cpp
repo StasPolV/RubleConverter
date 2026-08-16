@@ -54,7 +54,10 @@ CurrencyDropdown::CurrencyDropdown(CurrencyModel* model, QWidget* parent)
 	m_view->setVisible(false);
 	m_view->setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
 
+	m_other_button = buttons[OTHER];
 	connect(buttons[ARROW], &QToolButton::clicked, this, [this]() { TogglePopup(); });
+	connect(m_view, &QListView::clicked, this, [this](const QModelIndex& index)
+	        { m_other_button->setText(index.data(CurrencyModel::CodeRole).toString()); });
 }
 
 void CurrencyDropdown::TogglePopup()
@@ -82,7 +85,7 @@ void CurrencyDropdown::ResizePopup()
 {
 	const QPoint global_pos = mapToGlobal(QPoint(0, height()));
 	m_view->move(global_pos);
-	m_view->resize(width(), 150);
+	m_view->resize(window()->width(), 300);
 	m_view->show();
 }
 
