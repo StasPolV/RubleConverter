@@ -5,6 +5,8 @@
 #include <QResizeEvent>
 #include <QWidget>
 
+class CurrencyModel;
+
 class MainWidget : public QWidget
 {
 	Q_OBJECT
@@ -16,4 +18,5 @@ protected:
 
 private:
 	ScalableIconButton* m_switch_button;
+	CurrencyModel* m_currency_model;
 };

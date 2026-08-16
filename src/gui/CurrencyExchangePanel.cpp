@@ -2,9 +2,10 @@
 
 #include <QVBoxLayout>
 
-CurrencyExchangePanel::CurrencyExchangePanel(QWidget* parent) : QWidget(parent)
+CurrencyExchangePanel::CurrencyExchangePanel(CurrencyModel* model, QWidget* parent)
+    : QWidget(parent)
 {
-	CurrencyDropdown* dropdown = new CurrencyDropdown(this);
+	CurrencyDropdown* dropdown = new CurrencyDropdown(model, this);
 	AmountInputWidget* amount_input = new AmountInputWidget(this);
 
 	QVBoxLayout* main_layout = new QVBoxLayout(this);

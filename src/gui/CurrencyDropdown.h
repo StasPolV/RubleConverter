@@ -9,7 +9,7 @@ class CurrencyDropdown : public QWidget
 {
 	Q_OBJECT
 public:
-	explicit CurrencyDropdown(QWidget* parent = nullptr);
+	explicit CurrencyDropdown(CurrencyModel* model, QWidget* parent = nullptr);
 
 protected:
 	bool eventFilter(QObject* watched, QEvent* event) override;

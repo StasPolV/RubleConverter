@@ -74,5 +74,5 @@ void CurrencyFetcher::OnReplyFinished(QNetworkReply* reply)
 		qWarning() << "Unexpected response format (JSON array expected)";
 	}
 
-	emit Finished();
+	emit Finished(records);
 }

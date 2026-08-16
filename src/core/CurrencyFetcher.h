@@ -19,7 +19,7 @@ class CurrencyFetcher : public QObject
 	Q_OBJECT
 
 signals:
-	void Finished();
+	void Finished(QVector<CurrencyRecord> = {});
 
 public:
 	explicit CurrencyFetcher(QObject* parent = nullptr);

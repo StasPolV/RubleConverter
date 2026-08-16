@@ -1,6 +1,8 @@
 #include "MainWidget.h"
 
 #include "CurrencyExchangePanel.h"
+#include "CurrencyFetcherController.h"
+#include "CurrencyModel.h"
 
 #include <QHBoxLayout>
 #include <QToolButton>
@@ -12,9 +14,10 @@ namespace
 
 MainWidget::MainWidget(QWidget* parent) : QWidget(parent)
 {
-	CurrencyExchangePanel* panel_1 = new CurrencyExchangePanel(this);
-	CurrencyExchangePanel* panel_2 = new CurrencyExchangePanel(this);
+	m_currency_model = new CurrencyModel(this);
 
+	CurrencyExchangePanel* panel_1 = new CurrencyExchangePanel(m_currency_model, this);
+	CurrencyExchangePanel* panel_2 = new CurrencyExchangePanel(m_currency_model, this);
 	QHBoxLayout* main_layout = new QHBoxLayout(this);
 	main_layout->setContentsMargins(0, 0, 0, 0);
 	main_layout->addWidget(panel_1, 3);
@@ -24,6 +27,8 @@ MainWidget::MainWidget(QWidget* parent) : QWidget(parent)
 	m_switch_button->setMinimumWidth(50);
 	main_layout->addWidget(m_switch_button, 1);
 	main_layout->addWidget(panel_2, 3);
+
+	new CurrencyFetcherController(m_currency_model, this);
 }
 
 void MainWidget::resizeEvent(QResizeEvent* event)

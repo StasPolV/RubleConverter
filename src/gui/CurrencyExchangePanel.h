@@ -5,10 +5,10 @@
 
 #include <QWidget>
 
+class CurrencyModel;
+
 class CurrencyExchangePanel : public QWidget
 {
 public:
-	explicit CurrencyExchangePanel(QWidget* parent = nullptr);
-
-private:
+	explicit CurrencyExchangePanel(CurrencyModel* model, QWidget* parent = nullptr);
 };

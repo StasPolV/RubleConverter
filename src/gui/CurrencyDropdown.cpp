@@ -21,7 +21,8 @@ namespace
 	};
 }  // namespace
 
-CurrencyDropdown::CurrencyDropdown(QWidget* parent) : QWidget(parent)
+CurrencyDropdown::CurrencyDropdown(CurrencyModel* model, QWidget* parent)
+    : QWidget(parent), m_currency_model(model)
 {
 	QToolButton* buttons[_COUNT];
 	for (size_t i = 0; i < _COUNT; ++i)
@@ -46,8 +47,6 @@ CurrencyDropdown::CurrencyDropdown(QWidget* parent) : QWidget(parent)
 			layout->setStretch(i, 1);
 		}
 	}
-
-	m_currency_model = new CurrencyModel(this);
 
 	m_view = new QListView(this);
 	m_view->setModel(m_currency_model);
