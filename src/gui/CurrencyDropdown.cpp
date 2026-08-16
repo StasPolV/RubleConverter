@@ -2,6 +2,7 @@
 
 #include "CurrencyModel.h"
 
+#include <QButtonGroup>
 #include <QEvent>
 #include <QHBoxLayout>
 #include <QListView>
@@ -35,6 +36,15 @@ CurrencyDropdown::CurrencyDropdown(CurrencyModel* model, QWidget* parent)
 	buttons[RUB]->setText("RUB");
 	buttons[USD]->setText("USD");
 	buttons[EUR]->setText("EUR");
+
+	QButtonGroup* button_group = new QButtonGroup(this);
+	button_group->setExclusive(true);
+	for (currency i = RUB; i <= OTHER;)
+	{
+		buttons[i]->setCheckable(true);
+		button_group->addButton(buttons[i]);
+		i = static_cast<currency>(i + 1);
+	}
 
 	QHBoxLayout* layout = new QHBoxLayout(this);
 	layout->setSpacing(0);
