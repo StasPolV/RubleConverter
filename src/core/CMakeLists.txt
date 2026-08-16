@@ -1,4 +1,5 @@
-add_library(Core CurrencyFetcher.h CurrencyFetcher.cpp)
+add_library(Core CurrencyFetcher.h CurrencyFetcher.cpp CurrencyConverter.h
+                 CurrencyConverter.cpp)
 
 target_include_directories(Core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
