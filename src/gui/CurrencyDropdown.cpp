@@ -75,6 +75,7 @@ CurrencyDropdown::CurrencyDropdown(CurrencyModel* model, QWidget* parent)
 	        {
 		        QString data = index.data(CurrencyModel::CodeRole).toString();
 		        m_other_button->setText(data);
+		        m_other_button->setChecked(true);
 		        emit CurrencyChanged(data);
 	        });
 }
