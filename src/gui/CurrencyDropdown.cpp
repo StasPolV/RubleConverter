@@ -37,14 +37,18 @@ CurrencyDropdown::CurrencyDropdown(CurrencyModel* model, QWidget* parent)
 	buttons[USD]->setText("USD");
 	buttons[EUR]->setText("EUR");
 
-	QButtonGroup* button_group = new QButtonGroup(this);
-	button_group->setExclusive(true);
+	m_button_group = new QButtonGroup(this);
+	m_button_group->setExclusive(true);
+	connect(m_button_group, &QButtonGroup::buttonClicked, this,
+	        [this](QAbstractButton* button) { emit CurrencyChanged(button->text()); });
 	for (currency i = RUB; i <= OTHER;)
 	{
 		buttons[i]->setCheckable(true);
-		button_group->addButton(buttons[i]);
+		m_button_group->addButton(buttons[i]);
 		i = static_cast<currency>(i + 1);
 	}
+
+	buttons[RUB]->setChecked(true);
 
 	QHBoxLayout* layout = new QHBoxLayout(this);
 	layout->setSpacing(0);
@@ -66,8 +70,13 @@ CurrencyDropdown::CurrencyDropdown(CurrencyModel* model, QWidget* parent)
 
 	m_other_button = buttons[OTHER];
 	connect(buttons[ARROW], &QToolButton::clicked, this, [this]() { TogglePopup(); });
-	connect(m_view, &QListView::clicked, this, [this](const QModelIndex& index)
-	        { m_other_button->setText(index.data(CurrencyModel::CodeRole).toString()); });
+	connect(m_view, &QListView::clicked, this,
+	        [this](const QModelIndex& index)
+	        {
+		        QString data = index.data(CurrencyModel::CodeRole).toString();
+		        m_other_button->setText(data);
+		        emit CurrencyChanged(data);
+	        });
 }
 
 void CurrencyDropdown::TogglePopup()
@@ -122,4 +131,10 @@ bool CurrencyDropdown::eventFilter(QObject* watched, QEvent* event)
 	}
 
 	return QWidget::eventFilter(watched, event);
+}
+
+QString CurrencyDropdown::CurrentCode() const
+{
+	QAbstractButton* checked = m_button_group->checkedButton();
+	return checked ? checked->text() : QString();
 }

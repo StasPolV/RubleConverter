@@ -2,6 +2,7 @@
 
 #include <QFrame>
 #include <QResizeEvent>
+#include <QString>
 
 class QLineEdit;
 class QLabel;
@@ -9,8 +10,17 @@ class QLabel;
 class AmountInputWidget : public QFrame
 {
 	Q_OBJECT
+
+signals:
+	void TextEdited(const QString& text);
+
+public slots:
+	void SetAmount(const QString& text);
+
 public:
 	explicit AmountInputWidget(QWidget* parent = nullptr);
+
+	QString Amount() const;
 
 protected:
 	void resizeEvent(QResizeEvent* event) override;

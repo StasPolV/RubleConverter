@@ -26,6 +26,8 @@ AmountInputWidget::AmountInputWidget(QWidget* parent) : QFrame(parent)
 	main_layout->setContentsMargins(0, 0, 0, 0);
 	main_layout->addWidget(m_line_edit);
 	main_layout->addWidget(m_label);
+
+	connect(m_line_edit, &QLineEdit::textEdited, this, &AmountInputWidget::TextEdited);
 }
 
 void AmountInputWidget::resizeEvent(QResizeEvent* event)
@@ -40,4 +42,14 @@ void AmountInputWidget::resizeEvent(QResizeEvent* event)
 		label_font.setPixelSize(target_size);
 		m_label->setFont(label_font);
 	}
+}
+
+void AmountInputWidget::SetAmount(const QString& text)
+{
+	m_line_edit->setText(text);
+}
+
+QString AmountInputWidget::Amount() const
+{
+	return m_line_edit->text();
 }

@@ -1,5 +1,6 @@
 #include "CurrencyFetcherController.h"
 
+#include "CurrencyConverter.h"
 #include "CurrencyFetcher.h"
 #include "CurrencyModel.h"
 
@@ -195,13 +196,16 @@ namespace
 	}
 }  // namespace
 
-CurrencyFetcherController::CurrencyFetcherController(CurrencyModel* model, QObject* parent)
+CurrencyFetcherController::CurrencyFetcherController(CurrencyModel* model,
+                                                     CurrencyConverter* converter, QObject* parent)
     : QObject(parent), m_model(model)
 {
 	m_fetcher = new CurrencyFetcher(this);
 
 	connect(m_fetcher, &CurrencyFetcher::Finished, this, [this](QVector<CurrencyRecord> records)
 	        { m_model->SetCurrencies(convertToCurrencyVector(records)); });
+
+	connect(m_fetcher, &CurrencyFetcher::Finished, converter, &CurrencyConverter::FillExchangeRate);
 
 	m_fetcher->Fetch();
 }
