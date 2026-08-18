@@ -3,50 +3,58 @@
 #include "CurrencyConverter.h"
 #include "IExchangeView.h"
 
+namespace
+{
+	constexpr int kAmountPrecision = 2;  // TODO: move precision details into target implementation
+}
+
 ConversionController::ConversionController(IExchangeView* panel_1, IExchangeView* panel_2,
                                            CurrencyConverter* converter, QObject* parent)
     : QObject(parent), m_panel_1(panel_1), m_panel_2(panel_2), m_converter(converter)
 {
-	connect(m_panel_1->AsQObject(), SIGNAL(AmountEdited()), this, SLOT(OnPanelAmountEdited()));
-	connect(m_panel_2->AsQObject(), SIGNAL(AmountEdited()), this, SLOT(OnPanelAmountEdited()));
+	connect(m_panel_1->AsQObject(), SIGNAL(AmountEdited()), this, SLOT(OnPanel1Changed()));
+	connect(m_panel_2->AsQObject(), SIGNAL(AmountEdited()), this, SLOT(OnPanel2Changed()));
 
-	connect(m_panel_1->AsQObject(), SIGNAL(CurrencyChanged()), this, SLOT(OnPanelAmountEdited()));
-	connect(m_panel_2->AsQObject(), SIGNAL(CurrencyChanged()), this, SLOT(OnPanelAmountEdited()));
-	connect(m_panel_1->AsQObject(), SIGNAL(CurrencyChanged()), this, SLOT(ChangeLabel()));
-	connect(m_panel_2->AsQObject(), SIGNAL(CurrencyChanged()), this, SLOT(ChangeLabel()));
+	// When changing currency, the count goes from the left panel
+	connect(m_panel_1->AsQObject(), SIGNAL(CurrencyChanged()), this, SLOT(OnPanel1Changed()));
+	connect(m_panel_2->AsQObject(), SIGNAL(CurrencyChanged()), this, SLOT(OnPanel1Changed()));
+
+	connect(m_panel_1->AsQObject(), SIGNAL(CurrencyChanged()), this, SLOT(UpdateRateLabels()));
+	connect(m_panel_2->AsQObject(), SIGNAL(CurrencyChanged()), this, SLOT(UpdateRateLabels()));
 }
 
-void ConversionController::RecalculateFrom(IExchangeView* src, IExchangeView* target)
-{
-	target->SetAmount(
-	        QString::number(CalculateResult(src, target), 'f',
-	                        2));  // TODO: move precision details into target implementation
-}
-
-void ConversionController::OnPanelAmountEdited()
+void ConversionController::OnPanel1Changed()
 {
 	RecalculateFrom(m_panel_1, m_panel_2);
 }
 
-void ConversionController::ChangeLabel()
+void ConversionController::OnPanel2Changed()
 {
-	double result_1 = CalculateResult(m_panel_1, m_panel_2, 1);
-	double result_2 = CalculateResult(m_panel_2, m_panel_1, 1);
-	m_panel_1->SetLabel(m_panel_1->CurrentCode(), 1, m_panel_2->CurrentCode(), result_1);
-	m_panel_2->SetLabel(m_panel_2->CurrentCode(), 1, m_panel_1->CurrentCode(), result_2);
+	RecalculateFrom(m_panel_2, m_panel_1);
 }
 
-double ConversionController::CalculateResult(IExchangeView* src, IExchangeView* target,
-                                             double amount)
+void ConversionController::RecalculateFrom(IExchangeView* src, IExchangeView* target)
 {
-	if (amount != -1)
-	{
-		return m_converter->Convert(src->CurrentCode(), target->CurrentCode(), amount);
-	}
+	const double result = ConvertCurrentAmount(src, target);
+	target->SetAmount(QString::number(result, 'f', kAmountPrecision));
+}
 
-	const double src_amount = src->Amount().toDouble();
-	const double result =
-	        m_converter->Convert(src->CurrentCode(), target->CurrentCode(), src_amount);
+void ConversionController::UpdateRateLabels()
+{
+	const double rate_1_to_2 = ConvertAmount(m_panel_1, m_panel_2, 1.0);
+	const double rate_2_to_1 = ConvertAmount(m_panel_2, m_panel_1, 1.0);
 
-	return result;
+	m_panel_1->SetLabel(m_panel_1->CurrentCode(), 1, m_panel_2->CurrentCode(), rate_1_to_2);
+	m_panel_2->SetLabel(m_panel_2->CurrentCode(), 1, m_panel_1->CurrentCode(), rate_2_to_1);
+}
+
+double ConversionController::ConvertAmount(IExchangeView* src, IExchangeView* target,
+                                           double amount) const
+{
+	return m_converter->Convert(src->CurrentCode(), target->CurrentCode(), amount);
+}
+
+double ConversionController::ConvertCurrentAmount(IExchangeView* src, IExchangeView* target) const
+{
+	return ConvertAmount(src, target, src->Amount().toDouble());
 }

@@ -13,12 +13,15 @@ public:
 	                     CurrencyConverter* converter, QObject* parent = nullptr);
 
 private slots:
-	void OnPanelAmountEdited();
-	void ChangeLabel();
+	void OnPanel1Changed();
+	void OnPanel2Changed();
+	void UpdateRateLabels();
 
 private:
 	void RecalculateFrom(IExchangeView* src, IExchangeView* target);
-	double CalculateResult(IExchangeView* src, IExchangeView* target, double amount = -1);
+
+	double ConvertAmount(IExchangeView* src, IExchangeView* target, double amount) const;
+	double ConvertCurrentAmount(IExchangeView* src, IExchangeView* target) const;
 
 	IExchangeView* m_panel_1;
 	IExchangeView* m_panel_2;
