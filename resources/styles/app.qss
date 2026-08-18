@@ -105,6 +105,32 @@ QListView#CurrencyListPopup QScrollBar::sub-page:vertical {
 	background: none;
 }
 
+QListView#CurrencyListPopup QScrollBar:horizontal {
+	background: transparent;
+	height: 10px;
+	margin: 2px 4px 0px 4px;
+}
+
+QListView#CurrencyListPopup QScrollBar::handle:horizontal {
+	background: #D8DCE2;
+	border-radius: 5px;
+	min-width: 24px;
+}
+
+QListView#CurrencyListPopup QScrollBar::handle:horizontal:hover {
+	background: #2FA84C;
+}
+
+QListView#CurrencyListPopup QScrollBar::add-line:horizontal,
+QListView#CurrencyListPopup QScrollBar::sub-line:horizontal {
+	width: 0px;
+}
+
+QListView#CurrencyListPopup QScrollBar::add-page:horizontal,
+QListView#CurrencyListPopup QScrollBar::sub-page:horizontal {
+	background: none;
+}
+
 AmountInputWidget {
 	background-color: #FFFFFF;
 	border: 1px solid #D8DCE2;
