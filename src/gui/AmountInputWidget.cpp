@@ -49,8 +49,8 @@ void AmountInputWidget::SetAmount(const QString& text)
 	m_line_edit->setText(text);
 }
 
-void AmountInputWidget::SetLabel(const QString& src_currency, double src_val,
-                                 const QString& dest_currency, double dest_val)
+void AmountInputWidget::SetExchangeRateLabel(const QString& src_currency, double src_val,
+                                             const QString& dest_currency, double dest_val)
 {
 	m_label->setText(QString("%1 %2 = %3 %4")
 	                         .arg(src_val)

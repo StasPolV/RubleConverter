@@ -44,8 +44,10 @@ void ConversionController::UpdateRateLabels()
 	const double rate_1_to_2 = ConvertAmount(m_panel_1, m_panel_2, 1.0);
 	const double rate_2_to_1 = ConvertAmount(m_panel_2, m_panel_1, 1.0);
 
-	m_panel_1->SetLabel(m_panel_1->CurrentCode(), 1, m_panel_2->CurrentCode(), rate_1_to_2);
-	m_panel_2->SetLabel(m_panel_2->CurrentCode(), 1, m_panel_1->CurrentCode(), rate_2_to_1);
+	m_panel_1->SetExchangeRateLabel(m_panel_1->CurrentCode(), 1, m_panel_2->CurrentCode(),
+	                                rate_1_to_2);
+	m_panel_2->SetExchangeRateLabel(m_panel_2->CurrentCode(), 1, m_panel_1->CurrentCode(),
+	                                rate_2_to_1);
 }
 
 double ConversionController::ConvertAmount(IExchangeView* src, IExchangeView* target,

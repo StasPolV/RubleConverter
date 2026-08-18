@@ -13,6 +13,6 @@ public:
 	virtual void SetAmount(const QString&) = 0;
 	virtual QObject* AsQObject() = 0;
 	virtual void SetCode(const QString&) = 0;
-	virtual void SetLabel(const QString& src_currency, double src_val, const QString& dest_currency,
-	                      double dest_val) = 0;
+	virtual void SetExchangeRateLabel(const QString& src_currency, double src_val,
+	                                  const QString& dest_currency, double dest_val) = 0;
 };
