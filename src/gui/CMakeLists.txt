@@ -4,6 +4,8 @@ add_library(
   MainWidget.cpp
   CurrencyDropdown.h
   CurrencyDropdown.cpp
+  CurrencyListItemDelegate.h
+  CurrencyListItemDelegate.cpp
   AmountInputWidget.h
   AmountInputWidget.cpp
   ScalableLineEdit.h

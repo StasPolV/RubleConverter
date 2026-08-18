@@ -10,22 +10,32 @@
 #include <QHBoxLayout>
 #include <QToolButton>
 
+#include <algorithm>
+
 namespace
 {
 	double kSwitchButtonRatio = 0.3;
-}
+	constexpr int kSwitchButtonMinSide = 44;
+	constexpr int kSwitchButtonMaxSide = 72;
+}  // namespace
 
 MainWidget::MainWidget(QWidget* parent) : QWidget(parent)
 {
+	setAttribute(Qt::WA_StyledBackground, true);
+	setWindowTitle(tr("Ruble Converter"));
+	setMinimumSize(580, 320);
+
 	m_currency_model = new CurrencyModel(this);
 	CurrencyConverter* converter = new CurrencyConverter(this);
 
 	CurrencyExchangePanel* panel_1 = new CurrencyExchangePanel(m_currency_model, this);
 	CurrencyExchangePanel* panel_2 = new CurrencyExchangePanel(m_currency_model, this);
 	QHBoxLayout* main_layout = new QHBoxLayout(this);
-	main_layout->setContentsMargins(0, 0, 0, 0);
+	main_layout->setContentsMargins(24, 24, 24, 24);
+	main_layout->setSpacing(16);
 	main_layout->addWidget(panel_1, 3);
 	m_switch_button = new ScalableIconButton(this);
+	m_switch_button->setObjectName("SwitchButton");
 	m_switch_button->SetIconSource(":/images/arrows.png");
 	m_switch_button->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 	m_switch_button->setMinimumWidth(50);
@@ -45,5 +55,8 @@ void MainWidget::resizeEvent(QResizeEvent* event)
 {
 	QWidget::resizeEvent(event);
 
-	m_switch_button->setMaximumHeight(height() * kSwitchButtonRatio);
+	const int side = std::clamp(static_cast<int>(height() * kSwitchButtonRatio),
+	                            kSwitchButtonMinSide, kSwitchButtonMaxSide);
+	m_switch_button->setMaximumHeight(side);
+	m_switch_button->setMaximumWidth(side);
 }

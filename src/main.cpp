@@ -4,10 +4,27 @@
 #include "MainWidget.h"
 
 #include <QApplication>
+#include <QFile>
+#include <QTextStream>
+
+namespace
+{
+	void ApplyAppStyleSheet(QApplication& app)
+	{
+		QFile style_file(":/styles/app.qss");
+		if (!style_file.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			return;
+		}
+
+		app.setStyleSheet(QTextStream(&style_file).readAll());
+	}
+}  // namespace
 
 int main(int argc, char* argv[])
 {
 	QApplication app(argc, argv);
+	ApplyAppStyleSheet(app);
 
 	MainWidget main_widget;
 

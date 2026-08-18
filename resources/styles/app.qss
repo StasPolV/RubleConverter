@@ -1,0 +1,146 @@
+* {
+	font-family: "Segoe UI", "Inter", "Noto Sans", sans-serif;
+	color: #1A1F29;
+	outline: 0;
+}
+
+MainWidget {
+	background-color: #FFFFFF;
+}
+
+QToolTip {
+	background-color: #1A1F29;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 6px;
+	padding: 4px 8px;
+}
+
+CurrencyExchangePanel {
+	background: transparent;
+	border: none;
+}
+
+CurrencyDropdown QToolButton {
+	background-color: #FFFFFF;
+	color: #1A1F29;
+	border: 1px solid #D8DCE2;
+	border-right: none;
+	padding: 8px 4px;
+	font-weight: 600;
+	font-size: 10pt;
+}
+
+CurrencyDropdown QToolButton:hover {
+	background-color: #F3F5F7;
+}
+
+CurrencyDropdown QToolButton:checked {
+	background-color: #2FA84C;
+	color: #FFFFFF;
+	border-color: #2FA84C;
+}
+
+CurrencyDropdown QToolButton#CurrencyOptionFirst {
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+CurrencyDropdown QToolButton#CurrencyDropdownToggle {
+	border-right: 1px solid #D8DCE2;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	color: #7C8394;
+	min-width: 30px;
+	max-width: 40px;
+}
+
+CurrencyDropdown QToolButton#CurrencyDropdownToggle:checked {
+	border-right: 1px solid #2FA84C;
+	color: #FFFFFF;
+}
+
+QListView#CurrencyListPopup {
+	background-color: #FFFFFF;
+	border: 1px solid #E3E6EA;
+	border-radius: 12px;
+	padding: 6px;
+}
+
+QListView#CurrencyListPopup::item {
+	border-radius: 8px;
+}
+
+QListView#CurrencyListPopup::item:hover {
+	background-color: #F3F5F7;
+}
+
+QListView#CurrencyListPopup::item:selected {
+	background-color: #EAF7EF;
+}
+
+QListView#CurrencyListPopup QScrollBar:vertical {
+	background: transparent;
+	width: 8px;
+	margin: 4px 2px 4px 0px;
+}
+
+QListView#CurrencyListPopup QScrollBar::handle:vertical {
+	background: #D8DCE2;
+	border-radius: 4px;
+	min-height: 24px;
+}
+
+QListView#CurrencyListPopup QScrollBar::handle:vertical:hover {
+	background: #2FA84C;
+}
+
+QListView#CurrencyListPopup QScrollBar::add-line:vertical,
+QListView#CurrencyListPopup QScrollBar::sub-line:vertical {
+	height: 0px;
+}
+
+QListView#CurrencyListPopup QScrollBar::add-page:vertical,
+QListView#CurrencyListPopup QScrollBar::sub-page:vertical {
+	background: none;
+}
+
+AmountInputWidget {
+	background-color: #FFFFFF;
+	border: 1px solid #D8DCE2;
+	border-radius: 10px;
+}
+
+AmountInputWidget:focus {
+	border: 1px solid #2FA84C;
+}
+
+AmountInputWidget QLineEdit {
+	background: transparent;
+	border: none;
+	color: #1A1F29;
+	font-weight: 700;
+	padding: 6px 16px 0px 16px;
+	selection-background-color: #2FA84C;
+	selection-color: #FFFFFF;
+}
+
+AmountInputWidget QLabel {
+	background: transparent;
+	color: #7C8394;
+	padding: 0px 16px 10px 16px;
+}
+
+QToolButton#SwitchButton {
+	background-color: transparent;
+	border: none;
+	border-radius: 999px;
+}
+
+QToolButton#SwitchButton:hover {
+	background-color: #F3F5F7;
+}
+
+QToolButton#SwitchButton:pressed {
+	background-color: #E9ECEF;
+}

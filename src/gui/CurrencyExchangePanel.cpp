@@ -5,12 +5,14 @@
 CurrencyExchangePanel::CurrencyExchangePanel(CurrencyModel* model, QWidget* parent)
     : QWidget(parent)
 {
+	setAttribute(Qt::WA_StyledBackground, true);
+
 	m_dropdown = new CurrencyDropdown(model, this);
 	m_amount_input = new AmountInputWidget(this);
 
 	QVBoxLayout* main_layout = new QVBoxLayout(this);
-	main_layout->setContentsMargins(0, 0, 0, 0);
-	main_layout->setSpacing(3);
+	main_layout->setContentsMargins(18, 16, 18, 18);
+	main_layout->setSpacing(12);
 	main_layout->addWidget(m_dropdown);
 	main_layout->addWidget(m_amount_input);
 

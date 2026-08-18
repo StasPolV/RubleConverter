@@ -9,6 +9,14 @@
 #include <QRegularExpressionValidator>
 #include <QVBoxLayout>
 
+#include <algorithm>
+
+namespace
+{
+	constexpr double kLabelToAmountFontRatio = 0.4;
+	constexpr int kMinLabelPixelSize = 10;
+}  // namespace
+
 AmountInputWidget::AmountInputWidget(QWidget* parent) : QFrame(parent)
 {
 	m_line_edit = new ScalableLineEdit(this);
@@ -28,13 +36,17 @@ AmountInputWidget::AmountInputWidget(QWidget* parent) : QFrame(parent)
 	main_layout->addWidget(m_label);
 
 	connect(m_line_edit, &QLineEdit::textEdited, this, &AmountInputWidget::TextEdited);
+
+	setFocusProxy(m_line_edit);
 }
 
 void AmountInputWidget::resizeEvent(QResizeEvent* event)
 {
 	QWidget::resizeEvent(event);
 
-	const int target_size = m_line_edit->font().pixelSize();
+	const int target_size =
+	        std::max(kMinLabelPixelSize,
+	                 static_cast<int>(m_line_edit->font().pixelSize() * kLabelToAmountFontRatio));
 
 	if (m_label->font().pixelSize() != target_size)
 	{
