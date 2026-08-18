@@ -28,6 +28,8 @@ public:
 
 	QString CurrentCode() const override;
 	QString Amount() const override;
+	void SetLabel(const QString& src_currency, double src_val, const QString& dest_currency,
+	              double dest_val) override;
 
 private:
 	CurrencyDropdown* m_dropdown;

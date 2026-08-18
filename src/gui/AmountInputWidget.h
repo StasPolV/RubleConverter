@@ -21,6 +21,8 @@ public:
 	explicit AmountInputWidget(QWidget* parent = nullptr);
 
 	QString Amount() const;
+	void SetLabel(const QString& src_currency, double src_val, const QString& dest_currency,
+	              double dest_val);
 
 protected:
 	void resizeEvent(QResizeEvent* event) override;

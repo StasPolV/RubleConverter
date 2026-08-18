@@ -49,6 +49,16 @@ void AmountInputWidget::SetAmount(const QString& text)
 	m_line_edit->setText(text);
 }
 
+void AmountInputWidget::SetLabel(const QString& src_currency, double src_val,
+                                 const QString& dest_currency, double dest_val)
+{
+	m_label->setText(QString("%1 %2 = %3 %4")
+	                         .arg(src_val)
+	                         .arg(src_currency)
+	                         .arg(dest_val)
+	                         .arg(dest_currency));
+}
+
 QString AmountInputWidget::Amount() const
 {
 	return m_line_edit->text();

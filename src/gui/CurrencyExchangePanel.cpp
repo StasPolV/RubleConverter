@@ -20,6 +20,12 @@ CurrencyExchangePanel::CurrencyExchangePanel(CurrencyModel* model, QWidget* pare
 	        &CurrencyExchangePanel::AmountEdited);
 }
 
+void CurrencyExchangePanel::SetLabel(const QString& src_currency, double src_val,
+                                     const QString& dest_currency, double dest_val)
+{
+	m_amount_input->SetLabel(src_currency, src_val, dest_currency, dest_val);
+}
+
 QObject* CurrencyExchangePanel::AsQObject()
 {
 	return this;

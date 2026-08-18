@@ -14,9 +14,11 @@ public:
 
 private slots:
 	void OnPanelAmountEdited();
+	void ChangeLabel();
 
 private:
 	void RecalculateFrom(IExchangeView* src, IExchangeView* target);
+	double CalculateResult(IExchangeView* src, IExchangeView* target, double amount = -1);
 
 	IExchangeView* m_panel_1;
 	IExchangeView* m_panel_2;
