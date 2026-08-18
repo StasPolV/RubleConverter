@@ -39,3 +39,8 @@ void CurrencyExchangePanel::SetAmount(const QString& text)
 {
 	m_amount_input->SetAmount(text);
 }
+
+void CurrencyExchangePanel::SetCode(const QString& text)
+{
+	m_dropdown->SetCode(text);
+}

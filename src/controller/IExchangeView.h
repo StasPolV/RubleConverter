@@ -12,4 +12,5 @@ public:
 	virtual QString Amount() const = 0;
 	virtual void SetAmount(const QString&) = 0;
 	virtual QObject* AsQObject() = 0;
+	virtual void SetCode(const QString&) = 0;
 };

@@ -44,7 +44,7 @@ CurrencyDropdown::CurrencyDropdown(CurrencyModel* model, QWidget* parent)
 	for (currency i = RUB; i <= OTHER;)
 	{
 		buttons[i]->setCheckable(true);
-		m_button_group->addButton(buttons[i]);
+		m_button_group->addButton(buttons[i], static_cast<int>(i));
 		i = static_cast<currency>(i + 1);
 	}
 
@@ -138,4 +138,28 @@ QString CurrencyDropdown::CurrentCode() const
 {
 	QAbstractButton* checked = m_button_group->checkedButton();
 	return checked ? checked->text() : QString();
+}
+
+void CurrencyDropdown::SetCode(const QString& code)
+{
+	if (code == "RUB")
+	{
+		m_button_group->button(static_cast<int>(RUB))->setChecked(true);
+	}
+	else if (code == "EUR")
+	{
+		m_button_group->button(static_cast<int>(EUR))->setChecked(true);
+	}
+	else if (code == "USD")
+	{
+		m_button_group->button(static_cast<int>(USD))->setChecked(true);
+	}
+	else
+	{
+		auto* button = m_button_group->button(static_cast<int>(OTHER));
+		button->setText(code);
+		button->setChecked(true);
+	}
+
+	emit CurrencyChanged(code);
 }

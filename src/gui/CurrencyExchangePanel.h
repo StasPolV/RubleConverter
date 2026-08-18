@@ -19,6 +19,7 @@ signals:
 
 public slots:
 	void SetAmount(const QString& text) override;
+	void SetCode(const QString& text) override;
 
 	QObject* AsQObject() override;
 

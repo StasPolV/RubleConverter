@@ -1,6 +1,12 @@
 add_library(
-  Controller CurrencyFetcherController.h CurrencyFetcherController.cpp
-             ConversionController.h ConversionController.cpp IExchangeView.h)
+  Controller
+  CurrencyFetcherController.h
+  CurrencyFetcherController.cpp
+  ConversionController.h
+  ConversionController.cpp
+  IExchangeView.h
+  MainController.h
+  MainController.cpp)
 
 target_include_directories(Controller PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

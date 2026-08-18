@@ -18,6 +18,7 @@ signals:
 public:
 	explicit CurrencyDropdown(CurrencyModel* model, QWidget* parent = nullptr);
 	QString CurrentCode() const;
+	void SetCode(const QString& code);
 
 protected:
 	bool eventFilter(QObject* watched, QEvent* event) override;
