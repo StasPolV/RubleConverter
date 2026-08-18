@@ -7,11 +7,11 @@ ConversionController::ConversionController(IExchangeView* panel_1, IExchangeView
                                            CurrencyConverter* converter, QObject* parent)
     : QObject(parent), m_panel_1(panel_1), m_panel_2(panel_2), m_converter(converter)
 {
-	connect(m_panel_1->AsQObject(), SIGNAL(AmountEdited()), this, SLOT(OnPanel1AmountEdited()));
-	connect(m_panel_2->AsQObject(), SIGNAL(AmountEdited()), this, SLOT(OnPanel2AmountEdited()));
+	connect(m_panel_1->AsQObject(), SIGNAL(AmountEdited()), this, SLOT(OnPanelAmountEdited()));
+	connect(m_panel_2->AsQObject(), SIGNAL(AmountEdited()), this, SLOT(OnPanelAmountEdited()));
 
-	connect(m_panel_1->AsQObject(), SIGNAL(CurrencyChanged()), this, SLOT(OnPanel1AmountEdited()));
-	connect(m_panel_2->AsQObject(), SIGNAL(CurrencyChanged()), this, SLOT(OnPanel2AmountEdited()));
+	connect(m_panel_1->AsQObject(), SIGNAL(CurrencyChanged()), this, SLOT(OnPanelAmountEdited()));
+	connect(m_panel_2->AsQObject(), SIGNAL(CurrencyChanged()), this, SLOT(OnPanelAmountEdited()));
 }
 
 void ConversionController::RecalculateFrom(IExchangeView* src, IExchangeView* target)
@@ -21,12 +21,7 @@ void ConversionController::RecalculateFrom(IExchangeView* src, IExchangeView* ta
 	target->SetAmount(QString::number(result, 'f', 2));
 }
 
-void ConversionController::OnPanel1AmountEdited()
+void ConversionController::OnPanelAmountEdited()
 {
 	RecalculateFrom(m_panel_1, m_panel_2);
-}
-
-void ConversionController::OnPanel2AmountEdited()
-{
-	RecalculateFrom(m_panel_2, m_panel_1);
 }

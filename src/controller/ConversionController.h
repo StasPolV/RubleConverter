@@ -13,8 +13,7 @@ public:
 	                     CurrencyConverter* converter, QObject* parent = nullptr);
 
 private slots:
-	void OnPanel1AmountEdited();
-	void OnPanel2AmountEdited();
+	void OnPanelAmountEdited();
 
 private:
 	void RecalculateFrom(IExchangeView* src, IExchangeView* target);
