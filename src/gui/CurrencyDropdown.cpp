@@ -94,7 +94,7 @@ CurrencyDropdown::CurrencyDropdown(CurrencyModel* model, QWidget* parent)
 	connect(m_view, &QListView::clicked, this,
 	        [this](const QModelIndex& index)
 	        {
-		        QString data = index.data(CurrencyModel::CodeRole).toString();
+		        const QString data = index.data(CurrencyModel::CodeRole).toString();
 		        m_other_button->setText(data);
 		        m_other_button->setChecked(true);
 		        emit CurrencyChanged(data);

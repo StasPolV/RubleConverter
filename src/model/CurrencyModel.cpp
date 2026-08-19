@@ -8,7 +8,7 @@ int CurrencyModel::rowCount(const QModelIndex& parent) const
 	{
 		return 0;
 	}
-	return m_currencies.size();
+	return static_cast<int>(m_currencies.size());
 }
 
 QVariant CurrencyModel::data(const QModelIndex& index, int role) const
@@ -40,7 +40,7 @@ Qt::ItemFlags CurrencyModel::flags(const QModelIndex& index) const
 
 void CurrencyModel::AddCurrency(const Currency& currency)
 {
-	const int row = m_currencies.size();
+	const int row = static_cast<int>(m_currencies.size());
 	beginInsertRows(QModelIndex(), row, row);
 	m_currencies.append(currency);
 	endInsertRows();
@@ -61,6 +61,6 @@ void CurrencyModel::RemoveCurrency(int row)
 void CurrencyModel::SetCurrencies(QVector<Currency> currencies)
 {
 	beginResetModel();
-	m_currencies = currencies;
+	m_currencies = std::move(currencies);
 	endResetModel();
 }

@@ -9,7 +9,7 @@
 
 namespace
 {
-	void ApplyAppStyleSheet(QApplication& app)
+	void applyAppStyleSheet(QApplication& app)
 	{
 		QFile style_file(":/styles/app.qss");
 		if (!style_file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -24,7 +24,7 @@ namespace
 int main(int argc, char* argv[])
 {
 	QApplication app(argc, argv);
-	ApplyAppStyleSheet(app);
+	applyAppStyleSheet(app);
 
 	MainWidget main_widget;
 

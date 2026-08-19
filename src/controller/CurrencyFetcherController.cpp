@@ -8,7 +8,7 @@
 
 namespace
 {
-	static const QMap<QString, QString> kCurrencyNames = {
+	const QMap<QString, QString> kCurrencyNames = {
 	        {"AED", "United Arab Emirates Dirham"        },
 	        {"AFN", "Afghan Afghani"                     },
 	        {"ALL", "Albanian Lek"                       },
@@ -175,12 +175,12 @@ namespace
 	        {"ZWG", "Zimbabwean Gold"                    }
     };
 
-	QVector<Currency> convertToCurrencyVector(QVector<CurrencyRecord> records)
+	QVector<Currency> convertToCurrencyVector(const QVector<CurrencyRecord>& records)
 	{
 		QVector<Currency> currencies;
 		currencies.reserve(records.size());
 
-		for (CurrencyRecord& record : records)
+		for (const CurrencyRecord& record : records)
 		{
 			Currency c;
 			c.code = record.quote;

@@ -2,12 +2,13 @@
 
 CurrencyConverter::CurrencyConverter(QObject* parent) : QObject(parent) {}
 
-double CurrencyConverter::Convert(QString src_currency, QString dest_currency, double src_val)
+double CurrencyConverter::Convert(const QString& src_currency, const QString& dest_currency,
+                                  double src_val)
 {
 	return src_val * m_exchange_rate[dest_currency] / m_exchange_rate[src_currency];
 }
 
-void CurrencyConverter::FillExchangeRate(QVector<CurrencyRecord> records)
+void CurrencyConverter::FillExchangeRate(const QVector<CurrencyRecord>& records)
 {
 	for (const CurrencyRecord& rec : records)
 	{

@@ -14,7 +14,7 @@ CurrencyFetcher::CurrencyFetcher(QObject* parent) : QObject(parent)
 
 void CurrencyFetcher::Fetch()
 {
-	QUrl url("https://api.frankfurter.dev/v2/rates");
+	const QUrl url("https://api.frankfurter.dev/v2/rates");
 
 	QNetworkRequest request(url);
 	request.setHeader(QNetworkRequest::UserAgentHeader, "QtConverter/1.0");
