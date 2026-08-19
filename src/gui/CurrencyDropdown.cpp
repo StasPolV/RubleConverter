@@ -83,7 +83,6 @@ CurrencyDropdown::CurrencyDropdown(CurrencyModel* model, QWidget* parent)
 	m_view->setTextElideMode(Qt::ElideNone);
 	m_view->setVisible(false);
 	m_view->setWindowFlags(Qt::Tool | Qt::FramelessWindowHint | Qt::NoDropShadowWindowHint);
-	m_view->setAttribute(Qt::WA_TranslucentBackground);
 	m_view->setMinimumHeight(400);
 
 	m_item_delegate = new CurrencyListItemDelegate(this);
